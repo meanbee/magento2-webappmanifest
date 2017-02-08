@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="web">
+            <group id="webappmanifest" translate="label" type="text" sortOrder="400" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Web App Manifest Settings</label>
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="short_store_name" translate="label" type="text" sortOrder="101" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Short Store Name</label>
+                </field>
+                <field id="store_name" translate="label" type="text" sortOrder="102" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Store Name</label>
+                </field>
+                <field id="description" translate="label" type="text" sortOrder="103" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Store Description</label>
+                </field>
+                <field id="start_url" translate="label comment" type="text" sortOrder="105" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Start URL</label>
+                    <comment><![CDATA[The URL to start at when launching from the home screen shortcut. Relative to the Magento base URL. If left empty, the base URL will be used.]]></comment>
+                </field>
+                <field id="theme_color" translate="label comment" type="text" sortOrder="301" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Theme Color</label>
+                    <comment><![CDATA[The color used to customise the look of the browser. In hex format, e.g. #112233.]]></comment>
+                </field>
+                <field id="background_color" translate="label comment" type="text" sortOrder="302" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Background Color</label>
+                    <comment><![CDATA[The color used to customise the splash screen when launching from the home screen shortcut. In hex format, e.g. #AABBCC.]]></comment>
+                </field>
+                <field id="display_type" translate="label comment" type="select" sortOrder="303" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display Type</label>
+                    <comment><![CDATA[Choose whether the site is launched as a web page or a standalone app when launched from the home screen shortcut.]]></comment>
+                    <source_model>Meanbee\WebAppManifest\Model\Config\Source\Displaytype</source_model>
+                </field>
+                <field id="orientation" translate="label comment" type="select" sortOrder="304" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Screen Orientation</label>
+                    <comment><![CDATA[Choose whether the site launches in portrait or landscape mode when launced from the home screen shortcut.]]></comment>
+                    <source_model>Meanbee\WebAppManifest\Model\Config\Source\Orientation</source_model>
+                </field>
+                <field id="icon" translate="label comment" type="image" sortOrder="501" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>App Icon</label>
+                    <comment><![CDATA[An icon to use for splash screen and home screen shortcut.]]></comment>
+                    <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                    <upload_dir config="system/filesystem/media" scope_info="1">webappmanifest/icons</upload_dir>
+                    <base_url type="media" scope_info="1">webappmanifest/icons</base_url>
+                </field>
+                <field id="icon_sizes" translate="label comment" type="text" sortOrder="502" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>App Icon Sizes</label>
+                    <comment><![CDATA[A space separated list of sizes to allow showing the icon at.]]></comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
