@@ -6,7 +6,6 @@ A Magento 2 extension that adds a [Web App Manifest](https://developer.mozilla.o
 
 Install this extension via Composer:
 
-    composer config repositories.meanbee-webappmanifest vcs https://github.com/meanbee/magento2-webappmanifest
     composer require meanbee/magento2-webappmanifest
 
 ## Usage
