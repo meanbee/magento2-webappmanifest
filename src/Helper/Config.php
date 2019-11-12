@@ -1,22 +1,20 @@
 <?php
 
-namespace Meanbee\WebAppManifest\Helper;
+namespace Ampersand\WebAppManifest\Helper;
 
+use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Store\Model\ScopeInterface;
 
-class Config extends \Magento\Framework\App\Helper\AbstractHelper
+class Config extends AbstractHelper
 {
     const XML_PATH_ENABLE = "web/webappmanifest/enable";
 
     /**
-     * Check if Web App Manifest is enabled.
-     *
-     * @param null|string $scope
-     *
+     * @param string|null $scope
      * @return bool
      */
-    public function isEnabled($scope = null)
+    public function isEnabled(string $scope = null): bool
     {
-        return $this->scopeConfig->isSetFlag(static::XML_PATH_ENABLE, ScopeInterface::SCOPE_STORE, $scope);
+        return $this->scopeConfig->isSetFlag(self::XML_PATH_ENABLE, ScopeInterface::SCOPE_STORE, $scope);
     }
 }

@@ -32,12 +32,12 @@
                 <field id="display_type" translate="label comment" type="select" sortOrder="303" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Display Type</label>
                     <comment><![CDATA[Choose whether the site is launched as a web page or a standalone app when launched from the home screen shortcut.]]></comment>
-                    <source_model>Meanbee\WebAppManifest\Model\Config\Source\Displaytype</source_model>
+                    <source_model>Ampersand\WebAppManifest\Model\Config\Source\DisplayType</source_model>
                 </field>
                 <field id="orientation" translate="label comment" type="select" sortOrder="304" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Screen Orientation</label>
                     <comment><![CDATA[Choose whether the site launches in portrait or landscape mode when launced from the home screen shortcut.]]></comment>
-                    <source_model>Meanbee\WebAppManifest\Model\Config\Source\Orientation</source_model>
+                    <source_model>Ampersand\WebAppManifest\Model\Config\Source\Orientation</source_model>
                 </field>
                 <field id="icon" translate="label comment" type="image" sortOrder="501" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>App Icon</label>

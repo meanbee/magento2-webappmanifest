@@ -1,35 +1,53 @@
 {
-  "name": "meanbee/magento2-webappmanifest",
+  "name": "ampersand/magento2-webappmanifest",
   "description": "A Magento 2 extension that adds a Web App Manifest to the store.",
   "type": "magento2-module",
-  "version": "1.1.0",
+  "version": "1.2.0",
+  "minimum-stability": "stable",
   "license": [
     "MIT"
   ],
   "authors": [
     {
-      "name": "Tomas Gerulaitis",
-      "email": "tomas.gerulaitis@meanbee.com"
+      "name": "Evan Burrell",
+      "email": "eb@amp.co"
     }
   ],
-  "repositories": {
-    "magento": {
+  "repositories": [
+    {
       "type": "composer",
-      "url": "https://repo.magento.com/"
+      "url": "https://repo.packagist.com/ampersandhq/"
+    },
+    {
+      "packagist.org": false
     }
-  },
+  ],
   "require": {
-    "magento/framework": "^101.0.0",
-    "magento/module-backend": "^100.1.2",
-    "magento/module-config": "^101.0.0",
-    "magento/module-store": "^100.1.3"
+    "php": "^7.2.0",
+    "magento/framework": "^102.0",
+    "magento/module-backend": "^101.0",
+    "magento/module-config": "^101.1",
+    "magento/module-store": "^101.0"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^2.16",
+    "phpstan/phpstan": "^0.11.19"
   },
   "autoload": {
     "files": [
       "src/registration.php"
     ],
     "psr-4": {
-      "Meanbee\\WebAppManifest\\": "src/"
+      "Ampersand\\WebAppManifest\\": "src/"
     }
+  },
+  "scripts": {
+    "lint": "vendor/bin/php-cs-fixer fix --diff",
+    "test:lint": "vendor/bin/php-cs-fixer fix --dry-run --diff",
+    "test:types": "vendor/bin/phpstan analyze ./src",
+    "test": [
+      "@test:lint",
+      "@test:types"
+    ]
   }
 }

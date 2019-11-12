@@ -1,11 +1,13 @@
 <?php
 
-namespace Meanbee\WebAppManifest\Model\Config\Source;
+namespace Ampersand\WebAppManifest\Model\Config\Source;
 
-class Displaytype implements \Magento\Framework\Data\OptionSourceInterface
+use Magento\Framework\Data\OptionSourceInterface;
+
+class DisplayType implements OptionSourceInterface
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function toOptionArray()
     {
@@ -18,11 +20,9 @@ class Displaytype implements \Magento\Framework\Data\OptionSourceInterface
     }
 
     /**
-     * Get options in "key=>value" format.
-     *
      * @return array
      */
-    public function toArray()
+    private function toArray(): array
     {
         return [
             "browser"    => __("Web Page"),
