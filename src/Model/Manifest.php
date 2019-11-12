@@ -87,12 +87,11 @@ class Manifest implements ManifestInterface
         return $this->urlBuilder->getBaseUrl();
     }
 
-
     /**
      * @param string $config_path
-     * @return $this
+     * @return mixed
      */
-    private function populateFromConfig(string $config_path): self
+    private function populateFromConfig(string $config_path)
     {
         return $this->scopeConfig->getValue($config_path, ScopeInterface::SCOPE_STORE);
     }

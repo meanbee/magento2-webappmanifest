@@ -2,7 +2,7 @@
   "name": "ampersand/magento2-webappmanifest",
   "description": "A Magento 2 extension that adds a Web App Manifest to the store.",
   "type": "magento2-module",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "minimum-stability": "stable",
   "license": [
     "MIT"
