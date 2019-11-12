@@ -5,5 +5,5 @@ $viewModel = $block->getViewModel();
 ?>
 
 <?php if($viewModel->isManifestEnabled()): ?>
-<![CDATA[<link rel="manifest" href="<?= $block->escapeHtml($viewModel->getManifestUrl()) ?>"/>]]>
+<link rel="manifest" href="<?= $block->escapeHtml($viewModel->getManifestUrl()) ?>"/>
 <?php endif; ?>
