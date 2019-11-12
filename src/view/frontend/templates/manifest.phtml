@@ -1,0 +1,9 @@
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+/** @var \Ampersand\WebAppManifest\ViewModel\Manifest $viewModel */
+$viewModel = $block->getViewModel();
+?>
+
+<?php if($viewModel->isManifestEnabled()): ?>
+<![CDATA[<link rel="manifest" href="<?= $block->escapeHtml($viewModel->getManifestUrl()) ?>"/>]]>
+<?php endif; ?>

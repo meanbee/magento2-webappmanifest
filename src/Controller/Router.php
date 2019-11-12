@@ -1,34 +1,44 @@
 <?php
 
-namespace Meanbee\WebAppManifest\Controller;
+namespace Ampersand\WebAppManifest\Controller;
 
-class Router implements \Magento\Framework\App\RouterInterface
+use Ampersand\WebAppManifest\Helper\Config;
+use Magento\Framework\App\ActionFactory;
+use Magento\Framework\App\ActionInterface;
+use Magento\Framework\App\RequestInterface;
+use Magento\Framework\App\RouterInterface;
+
+class Router implements RouterInterface
 {
     const MANIFEST_ENDPOINT = "manifest.json";
 
-    /** @var \Magento\Framework\App\ActionFactory $actionFactory */
-    protected $actionFactory;
+    /** @var ActionFactory */
+    private $actionFactory;
 
-    /** @var \Meanbee\WebAppManifest\Helper\Config $config */
-    protected $config;
+    /** @var Config */
+    private $config;
 
     public function __construct(
-        \Magento\Framework\App\ActionFactory $actionFactory,
-        \Meanbee\WebAppManifest\Helper\Config $config
+        ActionFactory $actionFactory,
+        Config $config
     ) {
         $this->actionFactory = $actionFactory;
         $this->config = $config;
     }
 
-    public function match(\Magento\Framework\App\RequestInterface $request)
+    /**
+     * @param RequestInterface $request
+     * @return ActionInterface|null
+     */
+    public function match(RequestInterface $request): ?ActionInterface
     {
-        if ($this->config->isEnabled() && trim($request->getPathInfo(), "/") == static::MANIFEST_ENDPOINT) {
+        if ($this->config->isEnabled() && trim($request->getPathInfo(), "/") === self::MANIFEST_ENDPOINT) {
             $request
                 ->setModuleName("webappmanifest")
                 ->setControllerName("index")
                 ->setActionName("json");
 
-            return $this->actionFactory->create('Magento\Framework\App\Action\Forward');
+            return $this->actionFactory->create(\Magento\Framework\App\Action\Forward::class);
         }
 
         return null;

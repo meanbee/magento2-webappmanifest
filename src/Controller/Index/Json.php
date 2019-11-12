@@ -1,33 +1,37 @@
 <?php
 
-namespace Meanbee\WebAppManifest\Controller\Index;
+namespace Ampersand\WebAppManifest\Controller\Index;
 
-use Magento\Framework\App\ResponseInterface;
+use Ampersand\WebAppManifest\Api\Data\ManifestInterface;
+use Magento\Framework\App\Action\Action;
+use Magento\Framework\App\Action\Context;
+use Magento\Framework\Controller\Result\JsonFactory;
 
-class Json extends \Magento\Framework\App\Action\Action
+class Json extends Action
 {
-    /** @var \Magento\Framework\Controller\Result\JsonFactory */
-    protected $jsonFactory;
+    /** @var JsonFactory */
+    private $jsonFactory;
 
-    /** @var \Meanbee\WebAppManifest\Api\Data\ManifestInterface $manifest */
-    protected $manifest;
+    /** @var ManifestInterface */
+    private $manifest;
 
     public function __construct(
-        \Magento\Framework\App\Action\Context $context,
-        \Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
-        \Meanbee\WebAppManifest\Api\Data\ManifestInterface $manifest
+        Context $context,
+        JsonFactory $jsonFactory,
+        ManifestInterface $manifest
     ) {
         parent::__construct($context);
-
         $this->jsonFactory = $jsonFactory;
         $this->manifest = $manifest;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute()
     {
-        return $this->jsonFactory->create()->setData($this->manifest->getData());
+        $manifestData = $this->manifest->getData();
+
+        return $this->jsonFactory->create()->setData($manifestData);
     }
 }

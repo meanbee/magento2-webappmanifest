@@ -4,16 +4,11 @@
         <arguments>
             <argument name="routerList" xsi:type="array">
                 <item name="webappmanifest" xsi:type="array">
-                    <item name="class" xsi:type="string">Meanbee\WebAppManifest\Controller\Router</item>
+                    <item name="class" xsi:type="string">Ampersand\WebAppManifest\Controller\Router</item>
                     <item name="disable" xsi:type="boolean">false</item>
                     <item name="sortOrder" xsi:type="string">55</item>
                 </item>
             </argument>
-        </arguments>
-    </type>
-    <type name="Meanbee\WebAppManifest\Block\Register">
-        <arguments>
-            <argument name="template" xsi:type="string"><![CDATA[<link rel="manifest" href="%s"/>]]></argument>
         </arguments>
     </type>
 </config>

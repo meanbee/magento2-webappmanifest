@@ -1,141 +1,99 @@
 <?php
 
-namespace Meanbee\WebAppManifest\Model;
+namespace Ampersand\WebAppManifest\Model;
 
+use Ampersand\WebAppManifest\Api\Data\ManifestInterface;
+use Ampersand\WebAppManifest\ValueObject\ManifestContents;
+use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\UrlInterface;
 use Magento\Store\Model\ScopeInterface;
 
-class Manifest implements \Meanbee\WebAppManifest\Api\Data\ManifestInterface
+class Manifest implements ManifestInterface
 {
+    const XML_PATH_STORE_INFO_SHORT_NAME = 'web/webappmanifest/short_store_name';
+    const XML_PATH_STORE_INFO_NAME = 'web/webappmanifest/store_name';
+    const XML_PATH_STORE_INFO_DESCRIPTION = 'web/webappmanifest/description';
+    const XML_PATH_STORE_INFO_START_URL = 'web/webappmanifest/start_url';
+    const XML_PATH_DISPLAY_THEME_COLOR = 'web/webappmanifest/theme_color';
+    const XML_PATH_DISPLAY_BACKGROUND_COLOR = 'web/webappmanifest/background_color';
+    const XML_PATH_DISPLAY_DISPLAY_TYPE = 'web/webappmanifest/display_type';
+    const XML_PATH_DISPLAY_ORIENTATION = 'web/webappmanifest/orientation';
+    const XML_PATH_ICONS_ICON = 'web/webappmanifest/icon';
+    const XML_PATH_ICONS_SIZES = 'web/webappmanifest/icon_sizes';
 
-    const XML_PATH_STORE_INFO_SHORT_NAME = "web/webappmanifest/short_store_name";
-    const XML_PATH_STORE_INFO_NAME = "web/webappmanifest/store_name";
-    const XML_PATH_STORE_INFO_DESCRIPTION = "web/webappmanifest/description";
-    const XML_PATH_STORE_INFO_START_URL = "web/webappmanifest/start_url";
-    const XML_PATH_DISPLAY_THEME_COLOR = "web/webappmanifest/theme_color";
-    const XML_PATH_DISPLAY_BACKGROUND_COLOR = "web/webappmanifest/background_color";
-    const XML_PATH_DISPLAY_DISPLAY_TYPE = "web/webappmanifest/display_type";
-    const XML_PATH_DISPLAY_ORIENTATION = "web/webappmanifest/orientation";
-    const XML_PATH_ICONS_ICON = "web/webappmanifest/icon";
-    const XML_PATH_ICONS_SIZES = "web/webappmanifest/icon_sizes";
+    /** @var ScopeConfigInterface */
+    private $scopeConfig;
 
-    /** @var \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig */
-    protected $scopeConfig;
-
-    /** @var UrlInterface $urlBuilder */
-    protected $urlBuilder;
-
-    /** @var array $data */
-    protected $data;
+    /** @var UrlInterface */
+    private $urlBuilder;
 
     public function __construct(
-        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
+        ScopeConfigInterface $scopeConfig,
         UrlInterface $urlBuilder
     ) {
         $this->scopeConfig = $scopeConfig;
         $this->urlBuilder = $urlBuilder;
-        $this->data = [];
-
-        $this->populate();
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function getData()
+    public function getData(): array
     {
-        return $this->data;
+        $manifestData = ManifestContents::fromConfigData(
+            $this->populateFromConfig(self::XML_PATH_STORE_INFO_SHORT_NAME),
+            $this->populateFromConfig(self::XML_PATH_STORE_INFO_NAME),
+            $this->populateFromConfig(self::XML_PATH_STORE_INFO_DESCRIPTION),
+            $this->populateStartUrl(),
+            $this->populateFromConfig(self::XML_PATH_DISPLAY_THEME_COLOR),
+            $this->populateFromConfig(self::XML_PATH_DISPLAY_BACKGROUND_COLOR),
+            $this->populateFromConfig(self::XML_PATH_DISPLAY_DISPLAY_TYPE),
+            $this->populateFromConfig(self::XML_PATH_DISPLAY_ORIENTATION),
+            $this->populateIcons()
+        );
+
+        return $manifestData->toArray();
     }
 
     /**
-     * Populate the Manifest data from configuration.
-     *
-     * @return $this
+     * @return array
      */
-    public function populate()
+    protected function populateIcons(): array
     {
-        $this->populateStoreInformation();
-        $this->populateDisplayOptions();
-        $this->populateIcons();
-
-        return $this;
-    }
-
-    /**
-     * Populate the manifest with store information.
-     *
-     * @return $this
-     */
-    protected function populateStoreInformation()
-    {
-        $this->populateFromConfig("short_name", static::XML_PATH_STORE_INFO_SHORT_NAME);
-        $this->populateFromConfig("name", static::XML_PATH_STORE_INFO_NAME);
-        $this->populateFromConfig("description", static::XML_PATH_STORE_INFO_DESCRIPTION, true);
-
-        if ($path = $this->scopeConfig->getValue(static::XML_PATH_STORE_INFO_START_URL, ScopeInterface::SCOPE_STORE)) {
-            $start_url = $this->urlBuilder->getDirectUrl($path);
-        } else {
-            $start_url = $this->urlBuilder->getBaseUrl();
-        }
-        $this->data["start_url"] = $start_url;
-
-        return $this;
-    }
-
-    /**
-     * Populate the manifest with display settings.
-     *
-     * @return $this
-     */
-    protected function populateDisplayOptions()
-    {
-        $this->populateFromConfig("theme_color", static::XML_PATH_DISPLAY_THEME_COLOR, true);
-        $this->populateFromConfig("background_color", static::XML_PATH_DISPLAY_BACKGROUND_COLOR, true);
-        $this->populateFromConfig("display", static::XML_PATH_DISPLAY_DISPLAY_TYPE);
-        $this->populateFromConfig("orientation", static::XML_PATH_DISPLAY_ORIENTATION);
-
-        return $this;
-    }
-
-    /**
-     * Populate the manifest with app icon definitions.
-     *
-     * @return $this
-     */
-    protected function populateIcons()
-    {
-        if ($icon = $this->scopeConfig->getValue(static::XML_PATH_ICONS_ICON, ScopeInterface::SCOPE_STORE)) {
-            $url = implode("", [
-                $this->urlBuilder->getBaseUrl(["_type" => UrlInterface::URL_TYPE_MEDIA]),
-                "webappmanifest/icons/",
+        if ($icon = $this->populateFromConfig(self::XML_PATH_ICONS_ICON)) {
+            $url = implode('', [
+                $this->urlBuilder->getBaseUrl(['_type' => UrlInterface::URL_TYPE_MEDIA]),
+                'webappmanifest/icons/',
                 $icon,
             ]);
 
-            $sizes = $this->scopeConfig->getValue(static::XML_PATH_ICONS_SIZES, ScopeInterface::SCOPE_STORE);
+            $sizes = $this->populateFromConfig(self::XML_PATH_ICONS_SIZES);
 
-            $this->data["icons"] = [["src" => $url, "sizes" => $sizes]];
+            return [['src' => $url, 'sizes' => $sizes]];
         }
 
-        return $this;
+        return [];
     }
 
     /**
-     * Populate a manifest value from System Configration.
-     *
-     * @param      $key
-     * @param      $config_path
-     * @param bool $if_exists Only populate the value if it's not empty (default: false)
-     *
-     * @return $this
+     * @return string
      */
-    protected function populateFromConfig($key, $config_path, $if_exists = false)
+    private function populateStartUrl(): string
     {
-        $value = $this->scopeConfig->getValue($config_path, ScopeInterface::SCOPE_STORE);
-
-        if (!$if_exists || !empty($value)) {
-            $this->data[$key] = $value;
+        if ($path = $this->populateFromConfig(self::XML_PATH_STORE_INFO_START_URL)) {
+            return $this->urlBuilder->getDirectUrl($path);
         }
 
-        return $this;
+        return $this->urlBuilder->getBaseUrl();
+    }
+
+
+    /**
+     * @param string $config_path
+     * @return $this
+     */
+    private function populateFromConfig(string $config_path): self
+    {
+        return $this->scopeConfig->getValue($config_path, ScopeInterface::SCOPE_STORE);
     }
 }
