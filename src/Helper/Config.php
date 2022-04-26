@@ -6,7 +6,7 @@ use Magento\Store\Model\ScopeInterface;
 
 class Config extends \Magento\Framework\App\Helper\AbstractHelper
 {
-    const XML_PATH_ENABLE = "web/webappmanifest/enable";
+    public const XML_PATH_ENABLE = "web/webappmanifest/enable";
 
     /**
      * Check if Web App Manifest is enabled.

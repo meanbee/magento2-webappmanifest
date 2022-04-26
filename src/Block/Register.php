@@ -2,10 +2,16 @@
 
 namespace Meanbee\WebAppManifest\Block;
 
-class Register extends \Magento\Framework\View\Element\AbstractBlock
+use Magento\Framework\View\Element\AbstractBlock;
+use Meanbee\WebAppManifest\Helper\Config;
+use Magento\Framework\View\Element\Context;
+
+class Register extends AbstractBlock
 {
 
-    /** @var \Meanbee\WebAppManifest\Helper\Config $config */
+    /**
+     * @var Config
+     */
     protected $config;
 
     /**
@@ -15,9 +21,17 @@ class Register extends \Magento\Framework\View\Element\AbstractBlock
      */
     protected $template;
 
+    /**
+     * Data Construct.
+     *
+     * @param Context   $context
+     * @param Config    $config
+     * @param string    $template
+     * @param array     $data
+     */
     public function __construct(
-        \Magento\Framework\View\Element\Context $context,
-        \Meanbee\WebAppManifest\Helper\Config $config,
+        Context $context,
+        Config $config,
         string $template,
         array $data
     ) {
@@ -28,7 +42,9 @@ class Register extends \Magento\Framework\View\Element\AbstractBlock
     }
 
     /**
-     * @inheritdoc
+     * To Html.
+     *
+     * @SuppressWarnings(PHPMD.CamelCaseMethodName)
      */
     protected function _toHtml()
     {
@@ -37,9 +53,7 @@ class Register extends \Magento\Framework\View\Element\AbstractBlock
                 $this->template,
                 $this->_urlBuilder->getDirectUrl(\Meanbee\WebAppManifest\Controller\Router::MANIFEST_ENDPOINT)
             );
-        } else {
-            return '';
         }
+        return '';
     }
-
 }

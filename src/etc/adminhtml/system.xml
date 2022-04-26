@@ -32,23 +32,61 @@
                 <field id="display_type" translate="label comment" type="select" sortOrder="303" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Display Type</label>
                     <comment><![CDATA[Choose whether the site is launched as a web page or a standalone app when launched from the home screen shortcut.]]></comment>
-                    <source_model>Meanbee\WebAppManifest\Model\Config\Source\Displaytype</source_model>
+                    <source_model>Meanbee\WebAppManifest\Model\Config\Source\DisplayType</source_model>
                 </field>
                 <field id="orientation" translate="label comment" type="select" sortOrder="304" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Screen Orientation</label>
                     <comment><![CDATA[Choose whether the site launches in portrait or landscape mode when launced from the home screen shortcut.]]></comment>
                     <source_model>Meanbee\WebAppManifest\Model\Config\Source\Orientation</source_model>
                 </field>
-                <field id="icon" translate="label comment" type="image" sortOrder="501" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>App Icon</label>
+                <field id="icon_48" translate="label comment" type="image" sortOrder="501" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>App Icon - 48</label>
                     <comment><![CDATA[An icon to use for splash screen and home screen shortcut.]]></comment>
                     <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
                     <upload_dir config="system/filesystem/media" scope_info="1">webappmanifest/icons</upload_dir>
                     <base_url type="media" scope_info="1">webappmanifest/icons</base_url>
                 </field>
-                <field id="icon_sizes" translate="label comment" type="text" sortOrder="502" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>App Icon Sizes</label>
-                    <comment><![CDATA[A space separated list of sizes to allow showing the icon at.]]></comment>
+                <field id="icon_72" translate="label comment" type="image" sortOrder="501" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>App Icon - 72</label>
+                    <comment><![CDATA[An icon to use for splash screen and home screen shortcut.]]></comment>
+                    <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                    <upload_dir config="system/filesystem/media" scope_info="1">webappmanifest/icons</upload_dir>
+                    <base_url type="media" scope_info="1">webappmanifest/icons</base_url>
+                </field>
+                <field id="icon_96" translate="label comment" type="image" sortOrder="501" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>App Icon - 96</label>
+                    <comment><![CDATA[An icon to use for splash screen and home screen shortcut.]]></comment>
+                    <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                    <upload_dir config="system/filesystem/media" scope_info="1">webappmanifest/icons</upload_dir>
+                    <base_url type="media" scope_info="1">webappmanifest/icons</base_url>
+                </field>
+                <field id="icon_128" translate="label comment" type="image" sortOrder="501" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>App Icon - 128</label>
+                    <comment><![CDATA[An icon to use for splash screen and home screen shortcut.]]></comment>
+                    <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                    <upload_dir config="system/filesystem/media" scope_info="1">webappmanifest/icons</upload_dir>
+                    <base_url type="media" scope_info="1">webappmanifest/icons</base_url>
+                </field>
+                <field id="icon_192" translate="label comment" type="image" sortOrder="501" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>App Icon - 192</label>
+                    <comment><![CDATA[An icon to use for splash screen and home screen shortcut.]]></comment>
+                    <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                    <upload_dir config="system/filesystem/media" scope_info="1">webappmanifest/icons</upload_dir>
+                    <base_url type="media" scope_info="1">webappmanifest/icons</base_url>
+                </field>
+                <field id="icon_384" translate="label comment" type="image" sortOrder="501" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>App Icon - 384</label>
+                    <comment><![CDATA[An icon to use for splash screen and home screen shortcut.]]></comment>
+                    <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                    <upload_dir config="system/filesystem/media" scope_info="1">webappmanifest/icons</upload_dir>
+                    <base_url type="media" scope_info="1">webappmanifest/icons</base_url>
+                </field>
+                <field id="icon_512" translate="label comment" type="image" sortOrder="501" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>App Icon - 512</label>
+                    <comment><![CDATA[An icon to use for splash screen and home screen shortcut.]]></comment>
+                    <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                    <upload_dir config="system/filesystem/media" scope_info="1">webappmanifest/icons</upload_dir>
+                    <base_url type="media" scope_info="1">webappmanifest/icons</base_url>
                 </field>
             </group>
         </section>

@@ -2,10 +2,14 @@
 
 namespace Meanbee\WebAppManifest\Model\Config\Source;
 
-class Orientation implements \Magento\Framework\Data\OptionSourceInterface
+use Magento\Framework\Data\OptionSourceInterface;
+
+class Orientation implements OptionSourceInterface
 {
     /**
-     * @inheritdoc
+     * To Option Array.
+     *
+     * @return array
      */
     public function toOptionArray()
     {

@@ -2,20 +2,34 @@
 
 namespace Meanbee\WebAppManifest\Controller\Index;
 
+use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\ResponseInterface;
+use Magento\Framework\Controller\Result\JsonFactory;
+use Meanbee\WebAppManifest\Api\Data\ManifestInterface;
 
 class Json extends \Magento\Framework\App\Action\Action
 {
-    /** @var \Magento\Framework\Controller\Result\JsonFactory */
+    /**
+     * @var JsonFactory
+     */
     protected $jsonFactory;
 
-    /** @var \Meanbee\WebAppManifest\Api\Data\ManifestInterface $manifest */
+    /**
+     * @var ManifestInterface
+     */
     protected $manifest;
 
+    /**
+     * Construct.
+     *
+     * @param Context           $context
+     * @param JsonFactory       $jsonFactory
+     * @param ManifestInterface $manifest
+     */
     public function __construct(
-        \Magento\Framework\App\Action\Context $context,
-        \Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
-        \Meanbee\WebAppManifest\Api\Data\ManifestInterface $manifest
+        Context $context,
+        JsonFactory $jsonFactory,
+        ManifestInterface $manifest
     ) {
         parent::__construct($context);
 
